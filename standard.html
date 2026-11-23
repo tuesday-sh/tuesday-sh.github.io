@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The SureThingNet Standard — Tuesday.sh</title>
+  <meta name="description" content="Explore the SureThingNet Standard: industry-anchored ordinal scales (C1-C8, S0-S6, Z0-Z5, R1-R4, and OSI L1-L8) translated for home networks and homelabs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav-bar">
+      <a class="brand-link" href="/">
+        <span class="brand-mark" aria-hidden="true">T</span>
+        <span>Tuesday.sh</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/#how-it-works">How it works</a>
+        <a href="/standard" aria-current="page">Standard</a>
+        <a href="/#pricing">Pricing</a>
+        <a href="/roadmap">Roadmap</a>
+        <a href="/privacy">Privacy</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="wrap">
+        <h1>The SureThingNet Standard</h1>
+        <p>
+          Enterprise networking has decades of battle-tested standards—the OSI model, CISA asset inventories, NSA home segmentation guidelines, and NIST CM-8 / CSF. Home networks got none of it. The SureThingNet Standard distills those practices into four plain-English ordinal scales built into every screen of Tuesday.sh—and the foundation for our upcoming SureThingNet Home companion app.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="scale-c">
+      <div class="wrap">
+        <h2>Scale C: The 8 Hardware Categories (C1 → C8)</h2>
+        <p class="section-intro">
+          Every device on your network belongs to one of eight ordered hardware categories—from the internet gateway at the edge down to guest devices. No phantom switch ports, no arbitrary folders.
+        </p>
+        <div class="scale-grid">
+          <div class="scale-card">
+            <div class="scale-card-head">
+              <div class="scale-card-title">Gateway / WAN</div>
+              <span class="scale-badge">C1 • L3</span>
+            </div>
+            <div class="scale-card-sub">Home label: <strong>Wi-Fi Router / Gateway</strong> — Perimeter firewall, WAN uplink, NAT, DHCP server, and default gateway.</div>
+            <div class="scale-card-examples">UDM-Pro, UXG-Pro, Firewalla, pfSense</div>
+          </div>
+
+          <div class="scale-card">
+            <div class="scale-card-head">
+              <div class="scale-card-title">Switch Backbone</div>
+              <span class="scale-badge">C2 • L2</span>
+            </div>
+            <div class="scale-card-sub">Home label: <strong>Wired Switch Hub</strong> — Physical distribution plane, 802.1Q VLAN trunking, and PoE power delivery.</div>
+            <div class="scale-card-examples">USW-24-PoE, Enterprise 8 PoE, Catalyst</div>
+          </div>
+
+          <div class="scale-card">
+            <div class="scale-card-head">
+              <div class="scale-card-title">Wireless AP</div>
+              <span class="scale-badge">C3 • L1/2</span>
+            </div>
+            <div class="scale-card-sub">Home label: <strong>Wi-Fi Access Point</strong> — Radio-frequency access point translating wireless airwaves into wired Ethernet.</div>
+            <div class="scale-card-examples">U6-Pro, U7-Pro, Netgear AP, Eero</div>
+          </div>
+
+          <div class="scale-card">
+            <div class="scale-card-head">
+              <div class="scale-card-title">Compute / Server</div>
+              <span class="scale-badge">C4 • L4–7</span>
+            </div>
+            <div class="scale-card-sub">Home label: <strong>Home Server &amp; Storage</strong> — Storage (NAS), local DNS, container virtualization, and homelab workloads.</div>
+            <div class="scale-card-examples">TrueNAS, Unraid, Proxmox VE, Synology</div>
+          </div>
+
+          <div class="scale-card">
+            <div class="scale-card-head">
+              <div class="scale-card-title">Vision / Camera</div>
+              <span class="scale-badge">C5 • L7</span>
+            </div>
+            <div class="scale-card-sub">Home label: <strong>Smart Camera</strong> — Surveillance video, real-time RTSP/WebRTC streams, and perimeter sensing.</div>
+            <div class="scale-card-examples">UniFi Protect G5, Owlet Cam, Reolink</div>
+          </div>
+
+          <div class="scale-card">
+            <div class="scale-card-head">
+              <div class="scale-card-title">Smart Home / IoT</div>
+              <span class="scale-badge">C6 • L7</span>
+            </div>
+            <div class="scale-card-sub">Home label: <strong>Smart Home Hub</strong> — Home automation controllers, networked printers, and constrained smart peripherals.</div>
+            <div class="scale-card-examples">Home Assistant, Hubitat, Hue, Ecobee, Printers</div>
+          </div>
+
+          <div class="scale-card">
+            <div class="scale-card-head">
+              <div class="scale-card-title">Workstation / Client</div>
+              <span class="scale-badge">C7 • L7</span>
+            </div>
+            <div class="scale-card-sub">Home label: <strong>Personal Computer / Phone</strong> — Primary trusted user devices carrying user identities, keys, and productivity data.</div>
+            <div class="scale-card-examples">MacBook Pro, ThinkPad, Linux PC, iPad</div>
+          </div>
+
+          <div class="scale-card">
+            <div class="scale-card-head">
+              <div class="scale-card-title">Guest / Human (L8)</div>
+              <span class="scale-badge scale-badge-human">C8 • L8</span>
+            </div>
+            <div class="scale-card-sub">Home label: <strong>Guest / Visitor Device</strong> — Isolated perimeter for ephemeral human visitors, guest Wi-Fi, and user policy.</div>
+            <div class="scale-card-examples">Guest Portal, Visitor Laptop, Cast Client</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="scale-s">
+      <div class="wrap">
+        <h2>Scale S: The 7-Step Vertical Stack (S0 Space → S6 Apps)</h2>
+        <p class="section-intro">
+          Orders every device inspector from physical outlet to running software—and powers root-cause troubleshooting: if S0 Power or S2 Switch Port fails, downstream S6 App alerts are noise.
+        </p>
+        <div class="ordinal-list">
+          <div class="ordinal-row"><span class="scale-badge">S0</span><div><div class="ordinal-row-title">Rack, Room &amp; Power</div><div class="ordinal-row-desc">Room &amp; Outlet — Where the device physically lives and how it receives power.</div></div></div>
+          <div class="ordinal-row"><span class="scale-badge">S1</span><div><div class="ordinal-row-title">Hardware &amp; Lifespan</div><div class="ordinal-row-desc">Device &amp; Warranty — Model identity, manufacturer support window, and End-of-Life tier.</div></div></div>
+          <div class="ordinal-row"><span class="scale-badge">S2</span><div><div class="ordinal-row-title">Port, Speed &amp; PoE</div><div class="ordinal-row-desc">Cable &amp; Wi-Fi Signal — Physical uplink, link speed, or upstream switch jack.</div></div></div>
+          <div class="ordinal-row"><span class="scale-badge">S3</span><div><div class="ordinal-row-title">VLAN, IP &amp; Firewall</div><div class="ordinal-row-desc">Network Lane — Which trust ring the device sits in and how it is isolated.</div></div></div>
+          <div class="ordinal-row"><span class="scale-badge">S4</span><div><div class="ordinal-row-title">Firmware</div><div class="ordinal-row-desc">Built-in Software — Bootloader, BIOS/UEFI, and over-the-air vendor firmware releases.</div></div></div>
+          <div class="ordinal-row"><span class="scale-badge">S5</span><div><div class="ordinal-row-title">OS, Kernel &amp; Runtime</div><div class="ordinal-row-desc">System Software — Host operating system, hypervisor, and container runtime.</div></div></div>
+          <div class="ordinal-row"><span class="scale-badge">S6</span><div><div class="ordinal-row-title">Packages &amp; Services</div><div class="ordinal-row-desc">Apps &amp; Features — Exposed ports, running daemons, and Package URLs (PURLs).</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="scale-z">
+      <div class="wrap">
+        <h2>Scale Z: The 6 Inside-Out Trust Rings (Z0 Core → Z5 Internet)</h2>
+        <p class="section-intro">
+          Derived from CISA OT Asset Inventory and NSA Home Network Best Practices. Lower rings can initiate connections outward to higher rings, never backward—like keeping a guest bedroom separate from your home office safe.
+        </p>
+        <div class="ordinal-list">
+          <div class="ordinal-row"><span class="scale-badge">Z0</span><div><div class="ordinal-row-title">Core Gear (VLAN 1)</div><div class="ordinal-row-desc">Wi-Fi &amp; Network Gear — Routers, switches, and wireless access points.</div></div></div>
+          <div class="ordinal-row"><span class="scale-badge">Z1</span><div><div class="ordinal-row-title">Trusted (VLAN 10)</div><div class="ordinal-row-desc">Main Home Wi-Fi — Family laptops, phones, and primary workstations.</div></div></div>
+          <div class="ordinal-row"><span class="scale-badge">Z2</span><div><div class="ordinal-row-title">Homelab (VLAN 20)</div><div class="ordinal-row-desc">Home Storage &amp; Media — TrueNAS, Unraid, Proxmox, and self-hosted services.</div></div></div>
+          <div class="ordinal-row"><span class="scale-badge">Z3</span><div><div class="ordinal-row-title">Smart Home (VLAN 30)</div><div class="ordinal-row-desc">Smart Home Lane — TVs, security cameras, thermostats, smart plugs, and IoT hubs.</div></div></div>
+          <div class="ordinal-row"><span class="scale-badge">Z4</span><div><div class="ordinal-row-title">Guest (VLAN 99)</div><div class="ordinal-row-desc">Guest Wi-Fi — Client-isolated visitor access with internet only.</div></div></div>
+          <div class="ordinal-row"><span class="scale-badge">Z5</span><div><div class="ordinal-row-title">Internet Uplink (WAN)</div><div class="ordinal-row-desc">Internet Doorway — Public ISP modem, fiber ONT, and WAN boundary.</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="scale-r">
+      <div class="wrap">
+        <h2>Scale R: The 4 Operational Rhythms (R1 Event → R4 Annual)</h2>
+        <p class="section-intro">
+          Aligned with NIST CM-8 (System Component Inventory) and the NIST Cybersecurity Framework—without enterprise ITIL overhead. Four predictable habits keep a home network healthy.
+        </p>
+        <div class="ordinal-list">
+          <div class="ordinal-row"><span class="scale-badge">R1</span><div><div class="ordinal-row-title">Plug &amp; Tag (NIST CM-8)</div><div class="ordinal-row-desc">Name New Device — Capture what you know right when a new box joins the network, even as a rough guess.</div></div></div>
+          <div class="ordinal-row"><span class="scale-badge">R2</span><div><div class="ordinal-row-title">Monthly Patch Tuesday Readiness</div><div class="ordinal-row-desc">Monthly CVE/KEV &amp; Firmware Triage — Review matched security advisories on the 2nd Tuesday of each month.</div></div></div>
+          <div class="ordinal-row"><span class="scale-badge">R3</span><div><div class="ordinal-row-title">Seasonal Safety, Passwords &amp; Drift Audit</div><div class="ordinal-row-desc">Seasonal Check-Up — Every 90 days, confirm rough device guesses, check CPSC recalls, and clear stale gear.</div></div></div>
+          <div class="ordinal-row"><span class="scale-badge">R4</span><div><div class="ordinal-row-title">Annual Gear Review</div><div class="ordinal-row-desc">Yearly Lifespan Check — Review warranties, End-of-Life timelines, and plan replacements before hardware fails.</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="osi-model">
+      <div class="wrap">
+        <h2>The OSI 7+1 Layer Reference Model (L8 Human → L1 Physical)</h2>
+        <p class="section-intro">
+          Classic networking stops at Layer 7. Home security actually starts at Layer 8—the humans who own, share, and maintain the network.
+        </p>
+        <div class="ordinal-list">
+          <div class="ordinal-row human-layer"><span class="scale-badge scale-badge-human">LAYER 8</span><div><div class="ordinal-row-title">The Human Layer (Users • Admins • Policy)</div><div class="ordinal-row-desc">Human approval workflows, advisory mute overrides, household expectations, and seasonal audit accountability.</div></div></div>
+          <div class="ordinal-row"><span class="scale-badge">LAYER 7</span><div><div class="ordinal-row-title">Application (HTTP • DNS • RTSP • MQTT)</div><div class="ordinal-row-desc">Smart cameras (C5), IoT bridges (C6), Home Assistant, and application-level CVEs.</div></div></div>
+          <div class="ordinal-row"><span class="scale-badge">LAYER 6</span><div><div class="ordinal-row-title">Presentation (TLS/SSL • JSON • Encryption)</div><div class="ordinal-row-desc">Device TLS certificates, local JSON backups, and cryptographic firmware handshakes.</div></div></div>
+          <div class="ordinal-row"><span class="scale-badge">LAYER 5</span><div><div class="ordinal-row-title">Session (RPC • Sockets • WebRTC)</div><div class="ordinal-row-desc">Persistent camera streams and remote management sessions.</div></div></div>
+          <div class="ordinal-row"><span class="scale-badge">LAYER 4</span><div><div class="ordinal-row-title">Transport (TCP • UDP • Port Numbers)</div><div class="ordinal-row-desc">Homelab servers (C4) listening on service ports (443, 80, 53).</div></div></div>
+          <div class="ordinal-row"><span class="scale-badge">LAYER 3</span><div><div class="ordinal-row-title">Network (IP Routing • Subnets • NAT)</div><div class="ordinal-row-desc">Core Gateways (C1: UDM-Pro / UXG / Firewalla) and VLAN routing boundaries.</div></div></div>
+          <div class="ordinal-row"><span class="scale-badge">LAYER 2</span><div><div class="ordinal-row-title">Data Link (MAC Frames • Switches • 802.1Q)</div><div class="ordinal-row-desc">Switch Backbone (C2) and the 16×8 LED matrix chassis (128 slots).</div></div></div>
+          <div class="ordinal-row"><span class="scale-badge">LAYER 1</span><div><div class="ordinal-row-title">Physical (Cat6 Copper • Fiber SFP+ • RF)</div><div class="ordinal-row-desc">Wireless Access Points (C3), Ethernet runs, and physical RJ45 switch jacks.</div></div></div>
+        </div>
+
+        <div class="panel" style="margin-top:2rem;">
+          <h3>Built into Tuesday.sh today — and powering SureThingNet Home next</h3>
+          <p>
+            Every ordinal scale on this page is live inside the Tuesday.sh mobile app's built-in Reference Guide. In a future release, our companion app <strong>SureThingNet Home</strong> will expose the exact same standard with calmer household language so technical operators and family members speak the same language without jargon.
+          </p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="/#pricing">See Tuesday.sh v1 plans</a>
+            <a class="btn btn-secondary" href="/roadmap">View the public roadmap</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <div>Built at SURF Incubator in Seattle • Operated by Packablock LLC</div>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/roadmap">Roadmap</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -608,6 +608,112 @@ code {
   gap: 1rem;
 }
 
+/* SureThingNet Standard Ordinal Scales */
+.scale-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.scale-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.1rem 1.2rem;
+}
+
+.scale-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+}
+
+.scale-card-title {
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.scale-card-sub {
+  font-size: 0.84rem;
+  color: var(--muted);
+  margin-bottom: 0.45rem;
+}
+
+.scale-card-examples {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--accent-bright);
+}
+
+.scale-badge {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--accent-bright);
+  background: rgba(229, 120, 25, 0.14);
+  border: 1px solid rgba(229, 120, 25, 0.4);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.scale-badge-human {
+  color: var(--eol);
+  background: rgba(245, 158, 11, 0.14);
+  border-color: rgba(245, 158, 11, 0.5);
+}
+
+.ordinal-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.ordinal-row {
+  display: grid;
+  grid-template-columns: 82px minmax(0, 1fr);
+  gap: 0.85rem;
+  align-items: start;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.8rem 1rem;
+}
+
+.ordinal-row.human-layer {
+  border-color: rgba(245, 158, 11, 0.55);
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.ordinal-row-title {
+  font-weight: 600;
+  font-size: 0.94rem;
+  color: var(--text);
+}
+
+.ordinal-row-desc {
+  font-size: 0.86rem;
+  color: var(--muted);
+  margin-top: 0.15rem;
+}
+
+.standard-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@media (max-width: 860px) {
+  .scale-grid,
+  .standard-preview-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .prose {
   padding: 2.5rem 0 4rem;
 }
