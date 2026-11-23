@@ -1,218 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tuesday.sh — The Weekday Reinvented</title>
-    <!-- Premium Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #020617 100%);
-            --accent-primary: #818cf8;
-            --accent-secondary: #c084fc;
-            --glass-bg: rgba(30, 41, 59, 0.45);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background: var(--bg-gradient);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            position: relative;
-        }
-
-        /* Animated Background Orbs */
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(120px);
-            z-index: 1;
-            opacity: 0.6;
-            animation: float 20s infinite alternate ease-in-out;
-        }
-
-        .orb-1 {
-            width: 400px;
-            height: 400px;
-            background: var(--accent-primary);
-            top: -100px;
-            left: -100px;
-        }
-
-        .orb-2 {
-            width: 450px;
-            height: 450px;
-            background: var(--accent-secondary);
-            bottom: -150px;
-            right: -100px;
-            animation-delay: -5s;
-        }
-
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(50px, 40px) scale(1.1); }
-            100% { transform: translate(-20px, -30px) scale(0.95); }
-        }
-
-        /* Glassmorphic Container */
-        .container {
-            position: relative;
-            z-index: 10;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            padding: 3.5rem 3rem;
-            border-radius: 24px;
-            width: 90%;
-            max-width: 580px;
-            text-align: center;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            animation: fadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Badge */
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            background: rgba(129, 140, 248, 0.15);
-            border: 1px solid rgba(129, 140, 248, 0.3);
-            padding: 6px 16px;
-            border-radius: 9999px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--accent-primary);
-            margin-bottom: 2rem;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-
-        /* Main Heading */
-        h1 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1.2rem;
-            letter-spacing: -0.02em;
-            background: linear-gradient(to right, var(--text-main), #cbd5e1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Gradient Highlight */
-        .gradient-text {
-            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 800;
-        }
-
-        /* Description */
-        p {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-            margin-bottom: 2.5rem;
-            font-weight: 300;
-        }
-
-        /* Pulse Dot for "Live" status */
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background-color: #10b981;
-            border-radius: 50%;
-            margin-right: 8px;
-            display: inline-block;
-            box-shadow: 0 0 12px #10b981;
-            animation: pulse 1.8s infinite alternate;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-        }
-
-        /* CTA Button */
-        .cta-btn {
-            display: inline-flex;
-            align-items: center;
-            background: linear-gradient(135deg, var(--accent-primary) 0%, #6366f1 100%);
-            color: white;
-            font-size: 1.05rem;
-            font-weight: 600;
-            padding: 14px 32px;
-            border-radius: 12px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 30px -5px rgba(99, 102, 241, 0.6);
-            background: linear-gradient(135deg, #a5b4fc 0%, var(--accent-primary) 100%);
-        }
-
-        /* Footer info */
-        .footer {
-            margin-top: 3rem;
-            font-size: 0.8rem;
-            color: rgba(148, 163, 184, 0.5);
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tuesday.sh — Know what's on your network before it breaks</title>
+  <meta name="description" content="Tuesday.sh tracks your home and homelab hardware, filters real CVE, recall, and End-of-Life notices, and runs calm seasonal check-ups. Built at SURF Incubator in Seattle.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-
-    <!-- Dynamic background elements -->
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-
-    <!-- Glassmorphic Card -->
-    <div class="container">
-        <div class="badge">
-            <span class="status-dot"></span>
-            Tuesday.sh is live
-        </div>
-        <h1>Make Every Day <br><span class="gradient-text">Tuesday</span></h1>
-        <p>A beautifully simple workspace hosted securely on Cloudflare Pages. Built dynamically, delivered instantly, scaled globally.</p>
-        <a href="https://cloudflare.com" target="_blank" class="cta-btn">Powered by Cloudflare</a>
-        <div class="footer">
-            Designed in Antigravity • Hosted globally
-        </div>
+  <header class="site-header">
+    <div class="wrap nav-bar">
+      <a class="brand-link" href="/">
+        <span class="brand-mark" aria-hidden="true">T</span>
+        <span>Tuesday.sh</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#how-it-works">How it works</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#pricing">Pricing</a>
+        <a href="/roadmap">Roadmap</a>
+        <a href="/privacy">Privacy Policy</a>
+      </nav>
     </div>
+  </header>
 
+  <main>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <h1>Know what's on your network before it breaks.</h1>
+          <p class="hero-lead">
+            Tuesday.sh is a local-first iOS and Android companion for tracking your routers, switches, NAS boxes, cameras, and smart-home gear—then filtering only the CVEs, firmware updates, recalls, and End-of-Life notices that actually apply to your hardware.
+          </p>
+          <p class="hero-lead">
+            No enterprise agents required. No cloud account lock-in. Start with what you know, even if it's just "TP-Link router in the closet," and refine it over time.
+          </p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="#pricing">See Founding Member plan</a>
+            <a class="btn btn-secondary" href="/roadmap">Read the public roadmap</a>
+          </div>
+          <p class="hero-note">
+            Built at SURF Incubator in Seattle by Packablock LLC. Native iOS &amp; Android apps launching in v1.
+          </p>
+        </div>
+
+        <div class="rack-widget" aria-label="Interactive Tuesday.sh 128-port hardware status preview">
+          <div class="rack-header">
+            <span class="rack-title">My Home Rack — C1..C8 Spine</span>
+            <span class="rack-status-pill">12 tracked • 128 max</span>
+          </div>
+          <div class="cat-strip" aria-hidden="true">
+            <div class="cat-chip"><strong>C1</strong>GW</div>
+            <div class="cat-chip"><strong>C2</strong>SW</div>
+            <div class="cat-chip"><strong>C3</strong>AP</div>
+            <div class="cat-chip"><strong>C4</strong>SRV</div>
+            <div class="cat-chip"><strong>C5</strong>CAM</div>
+            <div class="cat-chip"><strong>C6</strong>IOT</div>
+            <div class="cat-chip"><strong>C7</strong>CLI</div>
+            <div class="cat-chip"><strong>C8</strong>GST</div>
+          </div>
+          <div class="led-grid" id="heroLedGrid" role="group" aria-label="Sample network device LEDs"></div>
+          <div class="rack-inspector" id="rackInspector" aria-live="polite">
+            <div>
+              <div class="rack-inspector-name" id="inspName">UniFi Dream Machine Pro</div>
+              <div class="rack-inspector-meta" id="inspMeta">C1 Gateway • Network Closet • UniFi OS 4.0.6 • Click any lit LED to inspect</div>
+            </div>
+            <span class="rack-inspector-badge" id="inspBadge" style="background:rgba(46,189,107,0.16); color:#2EBD6B; border:1px solid rgba(46,189,107,0.4);">OK</span>
+          </div>
+          <div class="rack-legend">
+            <span class="legend-item"><span class="swatch" style="background:var(--ok);"></span>OK</span>
+            <span class="legend-item"><span class="swatch" style="background:var(--update);"></span>Update</span>
+            <span class="legend-item"><span class="swatch" style="background:var(--eol);"></span>EOL</span>
+            <span class="legend-item"><span class="swatch" style="background:var(--cve);"></span>CVE / KEV</span>
+            <span class="legend-item"><span class="swatch" style="background:var(--guessed);"></span>Rough / Guessed</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="how-it-works">
+      <div class="wrap">
+        <h2>Progressive discovery, not spreadsheet homework.</h2>
+        <p class="section-intro">
+          Most people give up on network inventories because they feel like they need every serial number on day one. Tuesday.sh is designed to let you add rough entries fast and sharpen them during normal seasonal check-ups.
+        </p>
+        <div class="steps-grid">
+          <div class="step-block">
+            <div class="step-num">01 / Capture</div>
+            <h3>Add what you know today</h3>
+            <p>
+              Snap a photo of a router label, scan a barcode, pick a brand and device type, or save a rough guess like "Garage Smart Plug." Everything slots cleanly into the C1–C8 hardware spine.
+            </p>
+          </div>
+          <div class="step-block">
+            <div class="step-num">02 / Filter</div>
+            <h3>Only alerts that match your gear</h3>
+            <p>
+              Instead of doom-scrolling security feeds, Tuesday.sh matches CISA KEV vulnerabilities, manufacturer firmware releases, CPSC safety recalls, and End-of-Life notices directly against your inventory.
+            </p>
+          </div>
+          <div class="step-block">
+            <div class="step-num">03 / Maintain</div>
+            <h3>Run calm seasonal check-ups</h3>
+            <p>
+              Four simple rhythms (Hardware Lifecycle, Monthly Patch Tuesday, Seasonal Check-Up, Yearly Gear Check-In) nudge you to patch, confirm rough guesses, and retire dead hardware without alert fatigue.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="privacy">
+      <div class="wrap">
+        <h2>Local-first data. Zero photo retention.</h2>
+        <p class="section-intro">
+          Your home network map is sensitive. We built Tuesday.sh so you own your inventory file and can verify how camera frames are handled.
+        </p>
+        <div class="split-grid">
+          <div class="panel">
+            <h3>Ephemeral RAM-only camera vision</h3>
+            <p>
+              When you use optional AI photo identification to read a label or identify a chassis, frames travel over TLS 1.3 with <code>X-Tuesday-Image-Retention: none_ephemeral_ram_only</code>.
+            </p>
+            <p>
+              We analyze the image in volatile memory and wipe it immediately. We never write user photos to disk, databases, logs, or cloud buckets.
+            </p>
+          </div>
+          <div class="panel">
+            <h3>Sovereign JSON backup, always free</h3>
+            <p>
+              Your inventory lives on your device—no mandatory account wall. Export or restore your entire network as a plain, readable JSON file to iCloud Drive, Google Drive, or local storage anytime.
+            </p>
+            <p>
+              Our mobile client repositories are public so anyone can independently audit local discovery and privacy boundaries.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="pricing">
+      <div class="wrap">
+        <h2>Honest pricing. Zero vaporware behind the paywall.</h2>
+        <p class="section-intro">
+          Every feature listed on our Pro Tier 1 Founding Member plan works on launch day. Core safety advisories and local JSON backups stay free forever.
+        </p>
+        <div class="pricing-grid">
+          <div class="tier-card">
+            <div class="tier-header">
+              <h3>Free</h3>
+            </div>
+            <div class="tier-price">$0 <span>forever</span></div>
+            <p class="tier-sub">Enough to cover a typical home network with full safety advisories.</p>
+            <ul class="check-list">
+              <li>1 primary network site + interactive demo sandbox</li>
+              <li>Up to 15 tracked devices</li>
+              <li>15 free AI photo hardware identifications</li>
+              <li>Unlimited barcode scans, Gold Clues &amp; rough manual entries</li>
+              <li>All CVE, CISA KEV, recall, firmware &amp; End-of-Life bulletins</li>
+              <li>1-year &amp; 6-month Timeline views + Seasonal Check-Ups</li>
+              <li>Sovereign local JSON backup (export &amp; import)</li>
+            </ul>
+          </div>
+
+          <div class="tier-card featured">
+            <div class="tier-header">
+              <h3>Pro Tier 1</h3>
+              <span class="tier-tag">Founding Member</span>
+            </div>
+            <div class="tier-price">$2.99 <span>/ mo &nbsp;·&nbsp; $29/yr (save 19%)</span></div>
+            <p class="tier-sub">Early-adopter launch rate—grandfathered when future cloud sync &amp; family sharing arrive.</p>
+            <ul class="check-list">
+              <li>Up to 128 tracked devices per network site</li>
+              <li>Unlimited physical network locations (home, cabin, office, lab)</li>
+              <li>Unlimited AI photo hardware identification</li>
+              <li>Formatted Home &amp; Rack Dossier exports (PDF, CSV, Markdown)</li>
+              <li>Multi-year "All time" EOL replacement forecast &amp; full audit log</li>
+              <li>Full-fleet "Ask Claude" AI remediation brief generator</li>
+              <li>Apple Family Sharing enabled on iOS</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <div>Built at SURF Incubator in Seattle • Operated by Packablock LLC</div>
+      <div class="footer-links">
+        <a href="/roadmap">Roadmap</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="mailto:support@packablock.com">support@packablock.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const sampleDevices = [
+        { idx: 0, name: 'UniFi Dream Machine Pro', cat: 'C1 Gateway', room: 'Network Closet', ver: 'UniFi OS 4.0.6', status: 'OK', cls: 'led-ok', color: '#2EBD6B' },
+        { idx: 1, name: 'USW-Pro-Max-24-PoE', cat: 'C2 Switch', room: 'Network Closet', ver: '7.0.50 -> 7.1.26', status: 'UPDATE', cls: 'led-update', color: '#3B82F6' },
+        { idx: 2, name: 'U6-Enterprise AP', cat: 'C3 Access Point', room: 'Hallway Ceiling', ver: '6.6.77', status: 'OK', cls: 'led-ok', color: '#2EBD6B' },
+        { idx: 3, name: 'Synology DS923+ NAS', cat: 'C4 Server', room: 'Rack Shelf 2', ver: 'DSM 7.2.1', status: 'CVE / KEV', cls: 'led-cve', color: '#EF4444' },
+        { idx: 4, name: 'Proxmox NUC Node', cat: 'C4 Server', room: 'Rack Shelf 2', ver: 'PVE 8.2.7', status: 'OK', cls: 'led-ok', color: '#2EBD6B' },
+        { idx: 5, name: 'UniFi G5 Bullet', cat: 'C5 Camera', room: 'Front Porch', ver: '4.72.36', status: 'OK', cls: 'led-ok', color: '#2EBD6B' },
+        { idx: 6, name: 'AirPort Extreme (Legacy)', cat: 'C3 Access Point', room: 'Detached Garage', ver: '7.9.1 (Past EOL)', status: 'EOL', cls: 'led-eol', color: '#F59E0B' },
+        { idx: 7, name: 'Ecobee SmartThermostat', cat: 'C6 IoT', room: 'Living Room', ver: '4.8.7.232', status: 'OK', cls: 'led-ok', color: '#2EBD6B' },
+        { idx: 8, name: 'Garage Smart Plug (Rough)', cat: 'C6 IoT', room: 'Garage', ver: 'Unverified — refine later', status: 'GUESSED', cls: 'led-guessed', color: '#A78BFA' },
+        { idx: 9, name: 'Brother HL-L2395DW', cat: 'C6 IoT', room: 'Home Office', ver: '1.46 -> 1.52', status: 'UPDATE', cls: 'led-update', color: '#3B82F6' },
+        { idx: 10, name: 'MacBook Pro M4', cat: 'C7 Client', room: 'Desk', ver: 'macOS 15.3.2', status: 'OK', cls: 'led-ok', color: '#2EBD6B' },
+        { idx: 11, name: 'Guest VLAN Portal', cat: 'C8 Guest', room: 'Guest Suite', ver: 'Isolated Z4', status: 'OK', cls: 'led-ok', color: '#2EBD6B' }
+      ];
+
+      const grid = document.getElementById('heroLedGrid');
+      const nameEl = document.getElementById('inspName');
+      const metaEl = document.getElementById('inspMeta');
+      const badgeEl = document.getElementById('inspBadge');
+      if (!grid) return;
+
+      const byIdx = new Map(sampleDevices.map((d) => [d.idx, d]));
+      let activeBtn = null;
+
+      function selectDevice(dev, btn) {
+        if (activeBtn) activeBtn.classList.remove('selected');
+        activeBtn = btn;
+        if (activeBtn) activeBtn.classList.add('selected');
+        nameEl.textContent = dev.name;
+        metaEl.textContent = `${dev.cat} • ${dev.room} • ${dev.ver}`;
+        badgeEl.textContent = dev.status;
+        badgeEl.style.color = dev.color;
+        badgeEl.style.background = dev.color + '22';
+        badgeEl.style.border = '1px solid ' + dev.color + '66';
+      }
+
+      for (let i = 0; i < 64; i++) {
+        const dev = byIdx.get(i);
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        if (dev) {
+          btn.className = 'led active ' + dev.cls;
+          btn.setAttribute('aria-label', `${dev.name} (${dev.status})`);
+          btn.addEventListener('click', () => selectDevice(dev, btn));
+          btn.addEventListener('mouseenter', () => selectDevice(dev, btn));
+          if (i === 0) selectDevice(dev, btn);
+        } else {
+          btn.className = 'led';
+          btn.disabled = true;
+          btn.setAttribute('aria-hidden', 'true');
+        }
+        grid.appendChild(btn);
+      }
+    })();
+  </script>
 </body>
 </html>
