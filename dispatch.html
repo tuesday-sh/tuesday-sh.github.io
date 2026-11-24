@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Tuesday Dispatch — Tuesday.sh</title>
+  <meta name="description" content="Monthly hardware, hypervisor, and firmware advisories for homelabbers. No affiliate spam, just the upstream diff that matters the day after Patch Tuesday.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .dispatch-card {
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      margin-bottom: 28px;
+    }
+    .dispatch-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-bright);
+      margin-bottom: 10px;
+    }
+    .dispatch-form {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .dispatch-input {
+      flex: 1 1 240px;
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      min-height: 48px;
+    }
+    .dispatch-input:focus {
+      outline: 2px solid var(--accent-bright);
+      outline-offset: 2px;
+      border-color: var(--accent-bright);
+    }
+    .dispatch-submit {
+      background: var(--accent);
+      color: #111215;
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 12px 22px;
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      min-height: 48px;
+      cursor: pointer;
+    }
+    .dispatch-submit:hover {
+      background: var(--accent-bright);
+    }
+    .dispatch-meta {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+    .dispatch-pillars {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+    .dispatch-pillar {
+      background: var(--elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+    }
+    .dispatch-pillar h3 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+    .dispatch-pillar p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav-bar">
+      <a class="brand-link" href="/">
+        <span class="brand-mark" aria-hidden="true">T</span>
+        <span>Tuesday.sh</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/standard">Standard</a>
+        <a href="/dispatch" aria-current="page">Dispatch</a>
+        <a href="/roadmap">Roadmap</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="wrap-narrow">
+        <div class="dispatch-eyebrow">R2 Monthly Rhythm • Powered by Buttondown</div>
+        <h1>The Tuesday Dispatch</h1>
+        <p>Monthly hardware, hypervisor, and firmware advisories for homelabbers. No affiliate spam — just the upstream diff that matters the day after Patch Tuesday.</p>
+      </div>
+    </section>
+
+    <article class="wrap-narrow prose">
+      <div class="dispatch-card">
+        <h2 style="margin-top: 0;">Subscribe to the Monthly Dispatch</h2>
+        <p>Delivered once a month on the 2nd Tuesday at 10:00 AM PT, plus urgent CISA KEV &amp; physical hardware safety recalls when they drop.</p>
+
+        <form
+          action="https://buttondown.com/api/emails/embed-subscribe/tuesday.sh"
+          method="post"
+          class="dispatch-form"
+        >
+          <label for="bd-email" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">Email address</label>
+          <input
+            type="email"
+            name="email"
+            id="bd-email"
+            class="dispatch-input"
+            placeholder="you@homelab.net"
+            autocomplete="email"
+            required
+          />
+          <input type="hidden" value="1" name="embed" />
+          <input type="hidden" name="tag" value="tuesday-app-dispatch" />
+          <button type="submit" class="dispatch-submit">Subscribe</button>
+        </form>
+
+        <div class="dispatch-meta">
+          Zero ad tracking • One-click unsubscribe • <a href="https://buttondown.com/tuesday.sh/archive/" target="_blank" rel="noopener noreferrer">Browse past issues ↗</a>
+        </div>
+      </div>
+
+      <div class="dispatch-pillars">
+        <div class="dispatch-pillar">
+          <h3>Upstream Firmware Diffs</h3>
+          <p>Curated highlights for UniFi, Synology, Proxmox, OPNsense, OpenWrt, Home Assistant, and common home routers.</p>
+        </div>
+        <div class="dispatch-pillar">
+          <h3>CISA KEV &amp; Recalls</h3>
+          <p>Actively exploited CVEs and CPSC physical hardware recalls separated cleanly from routine release noise.</p>
+        </div>
+        <div class="dispatch-pillar">
+          <h3>EOL Runway Warnings</h3>
+          <p>Early heads-up before vendor security support expires so you can plan replacements on your own schedule.</p>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <div>Built at SURF Incubator in Seattle • Operated by Packablock LLC</div>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/standard">Standard</a>
+        <a href="/roadmap">Roadmap</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
