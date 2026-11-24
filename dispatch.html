@@ -127,7 +127,8 @@
         <p>Delivered once a month on the 2nd Tuesday at 10:00 AM PT, plus urgent CISA KEV &amp; physical hardware safety recalls when they drop.</p>
 
         <form
-          action="https://buttondown.com/api/emails/embed-subscribe/tuesday.sh"
+          id="dispatchForm"
+          action="/api/dispatch-subscribe"
           method="post"
           class="dispatch-form"
         >
@@ -141,10 +142,59 @@
             autocomplete="email"
             required
           />
-          <input type="hidden" value="1" name="embed" />
           <input type="hidden" name="tag" value="tuesday-app-dispatch" />
-          <button type="submit" class="dispatch-submit">Subscribe</button>
+          <button type="submit" id="dispatchSubmit" class="dispatch-submit">Subscribe</button>
         </form>
+
+        <div id="dispatchStatus" role="status" aria-live="polite" style="display:none; margin-top:14px; padding:12px 14px; border-radius:var(--radius-md); font-size:0.92rem; font-weight:600;"></div>
+
+        <script>
+          (function () {
+            const form = document.getElementById('dispatchForm');
+            const input = document.getElementById('bd-email');
+            const btn = document.getElementById('dispatchSubmit');
+            const status = document.getElementById('dispatchStatus');
+            if (!form) return;
+            form.addEventListener('submit', async function (e) {
+              e.preventDefault();
+              const email = (input.value || '').trim();
+              if (!email) return;
+              btn.disabled = true;
+              btn.textContent = 'Subscribing…';
+              status.style.display = 'none';
+              try {
+                const res = await fetch('/api/dispatch-subscribe', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ email, tag: 'tuesday-app-dispatch' })
+                });
+                const data = await res.json();
+                status.style.display = 'block';
+                if (res.ok && data.ok) {
+                  status.style.background = 'rgba(46, 189, 107, 0.14)';
+                  status.style.border = '1px solid rgba(46, 189, 107, 0.45)';
+                  status.style.color = '#F3F4F6';
+                  status.textContent = '✓ ' + (data.message || "You're subscribed!");
+                  input.value = '';
+                } else {
+                  status.style.background = 'rgba(239, 68, 68, 0.14)';
+                  status.style.border = '1px solid rgba(239, 68, 68, 0.45)';
+                  status.style.color = '#FCA5A5';
+                  status.textContent = data.error || 'Could not subscribe right now. Please try again.';
+                }
+              } catch (_) {
+                status.style.display = 'block';
+                status.style.background = 'rgba(239, 68, 68, 0.14)';
+                status.style.border = '1px solid rgba(239, 68, 68, 0.45)';
+                status.style.color = '#FCA5A5';
+                status.textContent = 'Network error. Please try again.';
+              } finally {
+                btn.disabled = false;
+                btn.textContent = 'Subscribe';
+              }
+            });
+          })();
+        </script>
 
         <div class="dispatch-meta">
           Zero ad tracking • One-click unsubscribe • <a href="https://buttondown.com/tuesday.sh/archive/" target="_blank" rel="noopener noreferrer">Browse past issues ↗</a>
