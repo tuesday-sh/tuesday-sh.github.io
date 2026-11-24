@@ -2,46 +2,90 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>The Tuesday Dispatch — Tuesday.sh</title>
   <meta name="description" content="Monthly hardware, hypervisor, and firmware advisories for homelabbers. No affiliate spam, just the upstream diff that matters the day after Patch Tuesday.">
+  <meta property="og:title" content="The Tuesday Dispatch — Tuesday.sh">
+  <meta property="og:description" content="Monthly hardware, hypervisor, and firmware advisories for homelabbers. Zero ad tracking, one-click unsubscribe.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tuesday.sh/dispatch">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
   <style>
+    /* Mobile-first above-the-fold layout for in-app browser & social links */
+    .dispatch-main {
+      flex: 1;
+      padding: 20px 16px 36px;
+    }
+    .dispatch-wrap {
+      width: 100%;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .dispatch-hero {
+      padding: 4px 0 18px;
+    }
+    .dispatch-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent-bright);
+      background: rgba(229, 120, 25, 0.12);
+      border: 1px solid rgba(229, 120, 25, 0.32);
+      border-radius: 999px;
+      padding: 4px 10px;
+      margin-bottom: 12px;
+    }
+    .dispatch-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(1.65rem, 6vw, 2.35rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+    .dispatch-hero p {
+      font-size: 0.96rem;
+      line-height: 1.5;
+      color: var(--muted);
+      margin: 0;
+    }
     .dispatch-card {
       background: var(--surface);
       border: 1px solid var(--border-strong);
       border-radius: var(--radius-lg);
-      padding: 28px 24px;
-      margin-bottom: 28px;
+      padding: 18px 16px;
+      margin-bottom: 20px;
     }
-    .dispatch-eyebrow {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent-bright);
-      margin-bottom: 10px;
+    .dispatch-card-lead {
+      font-size: 0.9rem;
+      line-height: 1.45;
+      color: var(--text);
+      margin: 0 0 14px;
     }
     .dispatch-form {
       display: flex;
+      flex-direction: column;
       gap: 10px;
-      margin-top: 20px;
-      flex-wrap: wrap;
     }
     .dispatch-input {
-      flex: 1 1 240px;
+      width: 100%;
       background: var(--bg);
       color: var(--text);
       border: 1px solid var(--border-strong);
       border-radius: var(--radius-md);
-      padding: 12px 14px;
+      padding: 13px 14px;
       font-family: var(--font-body);
-      font-size: 1rem;
-      min-height: 48px;
+      font-size: 16px; /* Prevents iOS Safari zoom on focus */
+      min-height: 50px;
+      -webkit-appearance: none;
     }
     .dispatch-input:focus {
       outline: 2px solid var(--accent-bright);
@@ -49,48 +93,113 @@
       border-color: var(--accent-bright);
     }
     .dispatch-submit {
+      width: 100%;
       background: var(--accent);
       color: #111215;
       border: none;
       border-radius: var(--radius-md);
-      padding: 12px 22px;
+      padding: 14px 22px;
       font-family: var(--font-display);
-      font-size: 0.95rem;
+      font-size: 1rem;
       font-weight: 700;
-      min-height: 48px;
+      min-height: 50px;
       cursor: pointer;
+      transition: background 0.15s ease;
     }
-    .dispatch-submit:hover {
+    .dispatch-submit:hover,
+    .dispatch-submit:focus-visible {
       background: var(--accent-bright);
+    }
+    .dispatch-submit:disabled {
+      opacity: 0.7;
+      cursor: wait;
+    }
+    .dispatch-status {
+      display: none;
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: var(--radius-md);
+      font-size: 0.92rem;
+      font-weight: 600;
+      line-height: 1.45;
     }
     .dispatch-meta {
       font-family: var(--font-mono);
-      font-size: 0.8rem;
+      font-size: 0.75rem;
+      line-height: 1.5;
       color: var(--muted);
       margin-top: 12px;
+      text-align: center;
     }
     .dispatch-pillars {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 14px;
-      margin-top: 20px;
+      grid-template-columns: 1fr;
+      gap: 10px;
     }
     .dispatch-pillar {
       background: var(--elevated);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
-      padding: 16px;
+      padding: 14px 16px;
     }
-    .dispatch-pillar h3 {
+    .dispatch-pillar h2 {
       font-family: var(--font-display);
-      font-size: 1rem;
-      margin-bottom: 6px;
+      font-size: 0.95rem;
+      margin: 0 0 4px;
       color: var(--text);
     }
     .dispatch-pillar p {
-      font-size: 0.9rem;
+      font-size: 0.875rem;
+      line-height: 1.45;
       color: var(--muted);
       margin: 0;
+    }
+
+    /* Compact header on mobile so the signup form sits immediately above the fold */
+    @media (max-width: 639px) {
+      .site-header .nav-bar {
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+      .site-header .nav-links a:not([href="/"]):not([href="/standard"]) {
+        display: none;
+      }
+    }
+
+    /* Tablet & Desktop breakpoint (social links / desktop visitors) */
+    @media (min-width: 640px) {
+      .dispatch-main {
+        padding: 48px 24px 64px;
+      }
+      .dispatch-hero {
+        padding: 8px 0 26px;
+      }
+      .dispatch-hero p {
+        font-size: 1.05rem;
+      }
+      .dispatch-card {
+        padding: 28px 26px;
+        margin-bottom: 24px;
+      }
+      .dispatch-form {
+        flex-direction: row;
+        align-items: stretch;
+      }
+      .dispatch-input {
+        flex: 1 1 auto;
+      }
+      .dispatch-submit {
+        width: auto;
+        flex: 0 0 auto;
+        padding: 14px 28px;
+      }
+      .dispatch-meta {
+        text-align: left;
+      }
+      .dispatch-pillars {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
     }
   </style>
 </head>
@@ -112,19 +221,16 @@
     </div>
   </header>
 
-  <main>
-    <section class="page-hero">
-      <div class="wrap-narrow">
-        <div class="dispatch-eyebrow">R2 Monthly Rhythm • Powered by Buttondown</div>
+  <main class="dispatch-main">
+    <div class="dispatch-wrap">
+      <section class="dispatch-hero">
+        <div class="dispatch-eyebrow">R2 Monthly Rhythm • 2nd Tuesday</div>
         <h1>The Tuesday Dispatch</h1>
-        <p>Monthly hardware, hypervisor, and firmware advisories for homelabbers. No affiliate spam — just the upstream diff that matters the day after Patch Tuesday.</p>
-      </div>
-    </section>
+        <p>Monthly hardware, hypervisor, and firmware advisories. No affiliate spam — just the upstream diff that matters the day after Patch Tuesday.</p>
+      </section>
 
-    <article class="wrap-narrow prose">
-      <div class="dispatch-card">
-        <h2 style="margin-top: 0;">Subscribe to the Monthly Dispatch</h2>
-        <p>Delivered once a month on the 2nd Tuesday at 10:00 AM PT, plus urgent CISA KEV &amp; physical hardware safety recalls when they drop.</p>
+      <section class="dispatch-card" aria-label="Newsletter signup">
+        <p class="dispatch-card-lead">Delivered once a month at 10:00 AM PT, plus urgent CISA KEV &amp; hardware safety recalls.</p>
 
         <form
           id="dispatchForm"
@@ -132,7 +238,7 @@
           method="post"
           class="dispatch-form"
         >
-          <label for="bd-email" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">Email address</label>
+          <label for="bd-email" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">Email address</label>
           <input
             type="email"
             name="email"
@@ -140,82 +246,37 @@
             class="dispatch-input"
             placeholder="you@homelab.net"
             autocomplete="email"
+            inputmode="email"
+            autocapitalize="off"
+            spellcheck="false"
             required
           />
           <input type="hidden" name="tag" value="tuesday-app-dispatch" />
-          <button type="submit" id="dispatchSubmit" class="dispatch-submit">Subscribe</button>
+          <button type="submit" id="dispatchSubmit" class="dispatch-submit">Subscribe Free</button>
         </form>
 
-        <div id="dispatchStatus" role="status" aria-live="polite" style="display:none; margin-top:14px; padding:12px 14px; border-radius:var(--radius-md); font-size:0.92rem; font-weight:600;"></div>
-
-        <script>
-          (function () {
-            const form = document.getElementById('dispatchForm');
-            const input = document.getElementById('bd-email');
-            const btn = document.getElementById('dispatchSubmit');
-            const status = document.getElementById('dispatchStatus');
-            if (!form) return;
-            form.addEventListener('submit', async function (e) {
-              e.preventDefault();
-              const email = (input.value || '').trim();
-              if (!email) return;
-              btn.disabled = true;
-              btn.textContent = 'Subscribing…';
-              status.style.display = 'none';
-              try {
-                const res = await fetch('/api/dispatch-subscribe', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ email, tag: 'tuesday-app-dispatch' })
-                });
-                const data = await res.json();
-                status.style.display = 'block';
-                if (res.ok && data.ok) {
-                  status.style.background = 'rgba(46, 189, 107, 0.14)';
-                  status.style.border = '1px solid rgba(46, 189, 107, 0.45)';
-                  status.style.color = '#F3F4F6';
-                  status.textContent = '✓ ' + (data.message || "You're subscribed!");
-                  input.value = '';
-                } else {
-                  status.style.background = 'rgba(239, 68, 68, 0.14)';
-                  status.style.border = '1px solid rgba(239, 68, 68, 0.45)';
-                  status.style.color = '#FCA5A5';
-                  status.textContent = data.error || 'Could not subscribe right now. Please try again.';
-                }
-              } catch (_) {
-                status.style.display = 'block';
-                status.style.background = 'rgba(239, 68, 68, 0.14)';
-                status.style.border = '1px solid rgba(239, 68, 68, 0.45)';
-                status.style.color = '#FCA5A5';
-                status.textContent = 'Network error. Please try again.';
-              } finally {
-                btn.disabled = false;
-                btn.textContent = 'Subscribe';
-              }
-            });
-          })();
-        </script>
+        <div id="dispatchStatus" class="dispatch-status" role="status" aria-live="polite"></div>
 
         <div class="dispatch-meta">
-          Zero ad tracking • One-click unsubscribe • <a href="https://buttondown.com/tuesday.sh/archive/" target="_blank" rel="noopener noreferrer">Browse past issues ↗</a>
+          Zero ad tracking • One-click unsubscribe • <a href="https://buttondown.com/tuesday.sh/archive/" target="_blank" rel="noopener noreferrer">Browse archive ↗</a>
         </div>
-      </div>
+      </section>
 
-      <div class="dispatch-pillars">
+      <section class="dispatch-pillars" aria-label="What is included">
         <div class="dispatch-pillar">
-          <h3>Upstream Firmware Diffs</h3>
-          <p>Curated highlights for UniFi, Synology, Proxmox, OPNsense, OpenWrt, Home Assistant, and common home routers.</p>
+          <h2>Upstream Firmware Diffs</h2>
+          <p>Curated highlights for UniFi, Synology, Proxmox, OPNsense, OpenWrt, Home Assistant, and home routers.</p>
         </div>
         <div class="dispatch-pillar">
-          <h3>CISA KEV &amp; Recalls</h3>
+          <h2>CISA KEV &amp; Recalls</h2>
           <p>Actively exploited CVEs and CPSC physical hardware recalls separated cleanly from routine release noise.</p>
         </div>
         <div class="dispatch-pillar">
-          <h3>EOL Runway Warnings</h3>
+          <h2>EOL Runway Warnings</h2>
           <p>Early heads-up before vendor security support expires so you can plan replacements on your own schedule.</p>
         </div>
-      </div>
-    </article>
+      </section>
+    </div>
   </main>
 
   <footer class="site-footer">
@@ -230,5 +291,53 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      const form = document.getElementById('dispatchForm');
+      const input = document.getElementById('bd-email');
+      const btn = document.getElementById('dispatchSubmit');
+      const status = document.getElementById('dispatchStatus');
+      if (!form) return;
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const email = (input.value || '').trim();
+        if (!email) return;
+        btn.disabled = true;
+        btn.textContent = 'Subscribing…';
+        status.style.display = 'none';
+        try {
+          const res = await fetch('/api/dispatch-subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, tag: 'tuesday-app-dispatch' })
+          });
+          const data = await res.json();
+          status.style.display = 'block';
+          if (res.ok && data.ok) {
+            status.style.background = 'rgba(46, 189, 107, 0.14)';
+            status.style.border = '1px solid rgba(46, 189, 107, 0.45)';
+            status.style.color = '#F3F4F6';
+            status.textContent = '✓ ' + (data.message || "You're subscribed!");
+            input.value = '';
+          } else {
+            status.style.background = 'rgba(239, 68, 68, 0.14)';
+            status.style.border = '1px solid rgba(239, 68, 68, 0.45)';
+            status.style.color = '#FCA5A5';
+            status.textContent = data.error || 'Could not subscribe right now. Please try again.';
+          }
+        } catch (_) {
+          status.style.display = 'block';
+          status.style.background = 'rgba(239, 68, 68, 0.14)';
+          status.style.border = '1px solid rgba(239, 68, 68, 0.45)';
+          status.style.color = '#FCA5A5';
+          status.textContent = 'Network error. Please try again.';
+        } finally {
+          btn.disabled = false;
+          btn.textContent = 'Subscribe Free';
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
