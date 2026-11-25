@@ -1,0 +1,46 @@
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - "README.md"
+  workflow_dispatch:
+
+concurrency:
+  group: cf-pages-tuesday-sh
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy tuesday.sh to Cloudflare Pages
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy site and Functions via Wrangler
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy . --project-name=tuesday-sh --branch=main
+
+      - name: Verify live site and /api/dispatch-subscribe Function
+        run: |
+          sleep 5
+          curl -fsS -o /dev/null https://tuesday.sh/
+          curl -fsS -o /dev/null https://tuesday.sh/dispatch
+          STATUS=$(curl -s -o /tmp/dispatch_check.json -w "%{http_code}" -X POST https://tuesday.sh/api/dispatch-subscribe \
+            -H "Content-Type: application/json" \
+            -d '{"email":"invalid"}')
+          echo "POST /api/dispatch-subscribe -> HTTP $STATUS"
+          cat /tmp/dispatch_check.json && echo ""
+          if [ "$STATUS" != "400" ]; then
+            echo "Expected HTTP 400 validation JSON from Pages Function, got HTTP $STATUS"
+            exit 1
+          fi
